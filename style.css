@@ -1,0 +1,580 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#030504;--panel:#080c09;--panel2:#0b100c;--line:#1c2920;
+  --cyan:#39ff9a;--blue:#39ff9a;--violet:#8affc1;--text:#edf7f0;--muted:#8fa49a;
+  --green:#20f2a0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-5;background:radial-gradient(circle at 72% 8%,rgba(57,255,154,.06),transparent 28%),radial-gradient(circle at 15% 82%,rgba(138,255,193,.04),transparent 30%),linear-gradient(135deg,#010201,#050805 55%,#010201)}
+.cyber-bg{position:fixed;inset:0;z-index:-4;pointer-events:none;overflow:hidden}
+.grid-glow{position:absolute;inset:0;opacity:.25;background-image:linear-gradient(rgba(57,255,154,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(57,255,154,.055) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(to bottom,black,transparent 92%)}
+.scan-beam{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 24px var(--cyan);opacity:.28;animation:scan 7s linear infinite}
+@keyframes scan{from{top:-3%}to{top:103%}}
+.hud-orb{position:absolute;border:1px solid rgba(0,234,255,.12);border-radius:50%;box-shadow:0 0 45px rgba(0,234,255,.04);animation:pulse 5s ease-in-out infinite}.orb-a{width:420px;height:420px;right:-180px;top:90px}.orb-b{width:320px;height:320px;left:-160px;bottom:8%}.hud-cross{position:absolute;color:var(--cyan);opacity:.45;font:20px "JetBrains Mono";animation:flicker 3s infinite}.cross-a{right:8%;top:24%}.cross-b{left:24%;bottom:18%}@keyframes pulse{50%{transform:scale(1.06);opacity:.55}}@keyframes flicker{50%{opacity:.12}}
+
+.shell{display:grid;grid-template-columns:255px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:rgba(3,10,18,.90);backdrop-filter:blur(14px);border-right:1px solid #17221b;padding:22px 17px;z-index:20}
+.brand{font:700 15px "JetBrains Mono";color:#effaf2}.brand .prompt{color:var(--cyan)}.brand-sub{font:8px "JetBrains Mono";letter-spacing:2px;color:#537087;margin-top:4px}
+.operator-card{margin-top:22px;border:1px solid #1b2a21;border-radius:13px;padding:17px 10px;text-align:center;background:linear-gradient(145deg,rgba(10,25,40,.9),rgba(4,13,23,.9));box-shadow:inset 0 0 35px rgba(0,234,255,.025)}
+.operator-photo{position:relative;width:94px;height:94px;margin:auto}.operator-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:2px solid var(--cyan);padding:3px;background:#fff;box-shadow:0 0 20px rgba(0,234,255,.25),0 0 0 5px rgba(47,124,255,.06)}.operator-photo span{position:absolute;right:0;bottom:7px;width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);border:2px solid #050805}
+.operator-card h3{font-size:14px;margin:13px 0 4px}.operator-card strong{font:600 10px "JetBrains Mono";color:var(--cyan)}.operator-card small{display:block;font:8px/1.7 "JetBrains Mono";color:#7d9484;margin-top:5px}
+.sidebar nav{margin-top:20px;display:grid;gap:5px}.sidebar nav a{display:flex;align-items:center;padding:11px 10px;border-radius:7px;color:#93aabd;text-decoration:none;font:11px "JetBrains Mono";border:1px solid transparent}.sidebar nav a i{font-style:normal;color:#56705e;font-size:8px;margin-right:11px}.sidebar nav a:hover,.sidebar nav a.active{color:var(--cyan);background:linear-gradient(90deg,rgba(0,234,255,.09),transparent);border-color:#12415a;box-shadow:inset 2px 0 var(--cyan)}
+.resume-btn{display:block;margin-top:28px;text-align:center;padding:11px;border:1px solid var(--cyan);border-radius:6px;color:var(--cyan);text-decoration:none;font:700 9px "JetBrains Mono";box-shadow:0 0 18px rgba(0,234,255,.08)}.resume-btn:hover{background:rgba(0,234,255,.08)}.system{margin-top:18px;color:#62796a;font:7px "JetBrains Mono"}.system span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);margin-right:6px}
+.main{width:100%;padding:20px 25px 55px;min-width:0}.content{width:min(1120px,100%);margin:auto}.window{background:linear-gradient(145deg,rgba(7,19,31,.96),rgba(3,11,20,.96));border:1px solid #1a281f;border-radius:11px;overflow:hidden;margin-bottom:20px;box-shadow:0 18px 50px rgba(0,0,0,.22),inset 0 0 50px rgba(0,234,255,.012)}.chrome{height:35px;border-bottom:1px solid #18241c;background:rgba(4,12,21,.9);display:flex;align-items:center;padding:0 13px;gap:6px}.chrome b{width:7px;height:7px;border-radius:50%;background:#3d4a41}.chrome b:first-child{background:#ff5f56}.chrome b:nth-child(2){background:#ffbd2e}.chrome b:nth-child(3){background:#27c93f}.chrome span{margin-left:10px;color:#567087;font:8px "JetBrains Mono"}
+.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:20px;padding:38px 42px 28px;position:relative;background:radial-gradient(circle at 75% 35%,rgba(57,255,154,.055),transparent 35%),radial-gradient(circle at 45% 100%,rgba(180,92,255,.04),transparent 40%)}
+.terminal-line{font:10px "JetBrains Mono";color:#728a79}.terminal-line span{color:var(--cyan)}.hero h1{font:800 clamp(48px,5vw,70px)/1.03 Inter;letter-spacing:-2.5px;margin:18px 0;color:#f0fff4}.hero h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 22px rgba(0,234,255,.25)}.tagline{font:11px "JetBrains Mono";color:#91a89a}.profile-command{margin-top:27px}.intro{max-width:750px;font:13px/1.85 "JetBrains Mono";color:#9db3a4}.hero-actions{display:flex;gap:10px;margin:22px 0;flex-wrap:wrap}.primary-btn,.outline-btn{padding:10px 14px;border-radius:5px;text-decoration:none;font:700 9px "JetBrains Mono"}.primary-btn{background:var(--cyan);color:#001018;box-shadow:0 0 18px rgba(0,234,255,.16)}.outline-btn{border:1px solid #27513a;color:#c9d9cf;background:rgba(6,18,30,.7)}.contact-strip{border-top:1px solid #18241c;padding-top:12px;display:flex;gap:16px;color:#708978;font:7.5px "JetBrains Mono";flex-wrap:wrap}
+.hero-photo{display:grid;place-items:center;min-height:280px;position:relative}.photo{width:205px;height:205px;border-radius:50%;padding:5px;border:1px solid var(--cyan);box-shadow:0 0 0 7px rgba(0,234,255,.025),0 0 45px rgba(0,234,255,.13)}.photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;background:#fff}.ring{position:absolute;border-radius:50%;border:1px solid rgba(0,234,255,.16);animation:spin 12s linear infinite}.ring-a{width:270px;height:270px}.ring-b{width:305px;height:170px;border-color:rgba(180,92,255,.14);animation-direction:reverse}@keyframes spin{to{transform:rotate(360deg)}}.status-chip{position:absolute;bottom:5px;border:1px solid #1b4a61;padding:7px 10px;background:#070c08;color:#7190a5;font:7px "JetBrains Mono"}.status-chip span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);margin-right:5px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(3,11,19,.7);border-top:1px solid #18241c}.stat-grid>div{padding:20px 22px;min-height:125px;border-right:1px solid #18241c;border-bottom:1px solid #18241c}.stat-grid>div:nth-child(3n){border-right:0}.stat-grid>div:nth-child(n+4){border-bottom:0}.stat-grid small{display:block;font:8px "JetBrains Mono";letter-spacing:2px;color:#62796a}.stat-grid strong{display:block;font-size:21px;margin:6px 0;color:#ecfff1}.stat-grid span,.stat-grid em{font:9px/1.6 "JetBrains Mono";color:#7d9484;font-style:normal}
+.section-body{padding:34px 38px}.section-head{display:flex;align-items:center;gap:11px;margin-bottom:25px}.section-head span{font:9px "JetBrains Mono";color:var(--cyan)}.section-head h2{font-size:27px;margin:0;white-space:nowrap}.section-head:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,#234b34,transparent);margin-left:8px}
+.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.tool-grid article,.card,.research-card,.cert-grid article,.award-card{border:1px solid #1b2a21;border-radius:8px;background:linear-gradient(145deg,rgba(9,25,40,.9),rgba(5,15,25,.9));padding:23px;transition:.25s;position:relative;overflow:hidden}.tool-grid article:before,.card:before,.research-card:before,.cert-grid article:before,.award-card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,234,255,.025),transparent 45%,rgba(180,92,255,.025));pointer-events:none}.tool-grid article:hover,.card:hover,.research-card:hover,.cert-grid article:hover,.award-card:hover{border-color:#348c61;transform:translateY(-2px);box-shadow:0 0 25px rgba(57,255,154,.055)}.tool-grid .icon{font-size:28px;color:var(--cyan)}.tool-grid h3{font-size:18px;margin:12px 0 8px}.tool-grid p,.timeline p,.card p,.research-card p,.cert-grid p,.award-card p{font:11px/1.85 "JetBrains Mono";color:#91a89a;margin:0}
+.timeline{border-left:1px solid #2a6545;padding-left:28px}.timeline article{position:relative;margin-bottom:27px}.timeline .dot{position:absolute;left:-33px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--cyan);background:#03111c;box-shadow:0 0 12px rgba(0,234,255,.65)}.timeline small{font:8px "JetBrains Mono";color:var(--green)}.timeline h3{font-size:17px;margin:7px 0}
+.project-grid,.research-grid,.cert-grid,.award-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.card h3,.research-card h3,.cert-grid h3,.award-card h3{font-size:18px;margin:11px 0 7px}.card label,.research-card label{font:8px "JetBrains Mono";color:#b7cbbd}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.chips span{padding:5px 8px;border:1px solid #17364b;border-radius:4px;color:#7992a5;font:8px "JetBrains Mono"}.repo-btn,.cert-grid a{display:inline-block;margin-top:13px;padding:8px 11px;border:1px solid #2c8d60;border-radius:5px;color:var(--cyan);text-decoration:none;font:8px "JetBrains Mono"}.project-status{margin-top:12px;font:8px "JetBrains Mono"}.ongoing,.restricted{color:var(--green)}.credential-icon,.award-icon{font-size:29px;margin-bottom:8px}.cert-grid article>small,.award-card>small{font:8px "JetBrains Mono";letter-spacing:1px;color:#62796a}.cert-grid p{margin-top:7px}.contact-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}.contact-info h3{font-size:27px;margin:0 0 7px}.contact-info p{font:11px/1.8 "JetBrains Mono";color:#91a89a}.contact-info>div{padding:11px 0;border-top:1px solid #18241c}.contact-info small{display:block;font:7px "JetBrains Mono";color:#62796a}.contact-info a{color:#aec2b4;font:9px "JetBrains Mono";text-decoration:none}.contact-layout form{padding:21px;border:1px solid #1b2a21;border-radius:8px;background:#040d16}.contact-layout label{display:block;font:8px "JetBrains Mono";color:#6f879b;margin-bottom:12px}.contact-layout input,.contact-layout textarea{width:100%;margin-top:6px;background:#020a12;border:1px solid #1c3425;color:#dff5e5;padding:10px;border-radius:4px;font:10px "JetBrains Mono";outline:none}.contact-layout input:focus,.contact-layout textarea:focus{border-color:var(--cyan);box-shadow:0 0 12px rgba(0,234,255,.08)}.contact-layout button{background:var(--cyan);border:0;color:#001018;padding:11px 16px;border-radius:5px;font:700 9px "JetBrains Mono";cursor:pointer}
+footer{width:min(1120px,100%);margin:28px auto 0;display:flex;justify-content:space-between;gap:15px;color:#5e7566;font:8px "JetBrains Mono"}
+@media(max-width:900px){.shell{grid-template-columns:220px minmax(0,1fr)}.sidebar{width:220px}.main{padding:15px}.hero{grid-template-columns:1fr}.hero-photo{order:-1;min-height:240px}.tool-grid,.project-grid,.research-grid,.cert-grid,.award-grid{grid-template-columns:1fr}.content{width:100%}}
+@media(max-width:700px){.shell{display:block}.sidebar{position:fixed;left:0;top:0;transform:translateX(-100%);transition:.25s;width:250px}.sidebar.open{transform:translateX(0)}.main{padding:10px}.hero{padding:28px 20px 23px}.hero h1{font-size:45px}.section-body{padding:25px 18px}.stat-grid{grid-template-columns:1fr 1fr}.stat-grid>div{min-height:120px;padding:17px}.stat-grid strong{font-size:18px}.section-head h2{font-size:23px}.contact-layout{grid-template-columns:1fr}.project-grid,.research-grid,.cert-grid,.award-grid{grid-template-columns:1fr}footer{flex-direction:column;text-align:center}}
+
+/* FINAL BLACK THEME / LAYOUT SAFETY */
+html, body { background:#030504 !important; }
+body { min-height:100vh; }
+.main {
+  background:
+    radial-gradient(circle at 80% 15%, rgba(57,255,154,.025), transparent 28%),
+    linear-gradient(180deg,#030504 0%,#050806 100%) !important;
+  min-height:100vh;
+}
+.content { width:min(1080px, calc(100% - 20px)); margin:0 auto; }
+.mobile-toggle {
+  display:none;
+  position:fixed;
+  right:18px;
+  top:18px;
+  z-index:100;
+  background:#070b08;
+  color:#39ff9a;
+  border:1px solid #28543b;
+  border-radius:6px;
+  padding:9px 12px;
+  font:700 16px "JetBrains Mono";
+}
+@media(max-width:700px){ .mobile-toggle{display:block;} }
+
+.cert-view{display:inline-block;margin-top:15px;padding:9px 12px;border:1px solid #2c8d60;border-radius:5px;color:#39ff9a;text-decoration:none;font:700 8px "JetBrains Mono";background:rgba(57,255,154,.025)}
+.cert-view:hover{background:rgba(57,255,154,.08);box-shadow:0 0 16px rgba(57,255,154,.10)}
+
+/* FINAL PURE-BLACK THEME */
+html, body {
+  background:#000 !important;
+  color:#f0f5f1 !important;
+}
+body:before {
+  background:#000 !important;
+  opacity:1;
+}
+.cyber-bg,
+.grid-glow,
+.main {
+  background:#000 !important;
+}
+.main {
+  min-height:100vh;
+}
+.grid-glow {
+  opacity:.08 !important;
+  background-image:
+    linear-gradient(rgba(57,255,154,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,154,.05) 1px, transparent 1px) !important;
+}
+.window,
+.tool-grid article,
+.card,
+.research-card,
+.cert-grid article,
+.award-card,
+.operator-card,
+.contact-layout form {
+  background:#050705 !important;
+  border-color:#183020 !important;
+}
+.chrome {
+  background:#020302 !important;
+  border-color:#132219 !important;
+}
+.section-head:after {
+  background:linear-gradient(90deg,#183b27,transparent) !important;
+}
+.cert-grid {
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:16px !important;
+}
+.cert-card {
+  min-height:250px;
+}
+.cert-view {
+  display:inline-block !important;
+  margin-top:16px !important;
+  padding:10px 13px !important;
+  border:1px solid #2b8b5b !important;
+  border-radius:5px !important;
+  color:#39ff9a !important;
+  text-decoration:none !important;
+  font:700 9px "JetBrains Mono" !important;
+}
+.cert-view:hover {
+  background:rgba(57,255,154,.07) !important;
+  box-shadow:0 0 18px rgba(57,255,154,.12) !important;
+}
+@media(max-width:700px){
+  .cert-grid{grid-template-columns:1fr !important}
+}
+
+/* FINAL RESPONSIVE CENTERING FIX
+   Prevents Projects/Experience/other windows from shifting sideways
+   when the browser is narrowed or zoomed. */
+@media (max-width: 1100px) {
+  .shell {
+    display: block !important;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 270px !important;
+    height: 100vh !important;
+    transform: translateX(-105%) !important;
+    transition: transform .25s ease !important;
+    z-index: 1000 !important;
+  }
+
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .mobile-toggle {
+    display: block !important;
+  }
+
+  .main {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 18px 16px 50px !important;
+    margin: 0 !important;
+  }
+
+  .content {
+    width: min(1080px, 100%) !important;
+    max-width: 1080px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .window {
+    width: 100% !important;
+    max-width: 1080px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (min-width: 1101px) {
+  .mobile-toggle {
+    display: none !important;
+  }
+
+  .shell {
+    display: grid !important;
+    grid-template-columns: 255px minmax(0, 1fr) !important;
+  }
+
+  .main {
+    min-width: 0 !important;
+  }
+
+  .content {
+    width: min(1080px, 100%) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Narrow layouts: one clean column, no horizontal squeeze. */
+@media (max-width: 760px) {
+  .main {
+    padding: 14px 10px 45px !important;
+  }
+
+  .content,
+  .window {
+    width: 100% !important;
+  }
+
+  .hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-photo {
+    order: -1 !important;
+  }
+
+  .tool-grid,
+  .project-grid,
+  .research-grid,
+  .cert-grid,
+  .award-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .section-body {
+    padding: 25px 18px !important;
+  }
+}
+
+/* At very small widths, keep the terminal windows comfortably inside the viewport. */
+@media (max-width: 480px) {
+  .main {
+    padding: 10px 7px 35px !important;
+  }
+
+  .section-body {
+    padding: 22px 14px !important;
+  }
+
+  .hero {
+    padding: 25px 16px 22px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 10vw, 48px) !important;
+  }
+}
+
+/* =========================================================
+   FINAL LAYOUT FIX
+   - Sidebar scrolls independently
+   - Main content is centered inside its own column
+   - No horizontal overflow
+   - At narrow widths sidebar becomes an off-canvas menu
+   ========================================================= */
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.shell {
+  width: 100%;
+  max-width: 100vw;
+  min-width: 0;
+  display: grid !important;
+  grid-template-columns: 280px minmax(0, 1fr) !important;
+  align-items: stretch;
+}
+
+.sidebar {
+  position: sticky !important;
+  top: 0 !important;
+  left: auto !important;
+  width: 280px !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+  z-index: 50 !important;
+}
+
+.main {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 22px 24px 60px !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+.content {
+  width: min(1120px, 100%) !important;
+  max-width: 1120px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.window {
+  width: 100% !important;
+  max-width: 1120px !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.window > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.project-grid,
+.tool-grid,
+.cert-grid,
+.award-grid,
+.research-grid {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.project-card,
+.tool-card,
+.cert-card,
+.award-card,
+.research-card {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-wrap: anywhere;
+}
+
+/* Keep the sidebar fully usable on tall screens: the page itself does not
+   need to scroll just to reach the sidebar controls. */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(57,255,154,.25);
+  border-radius: 8px;
+}
+
+/* ---------- narrow / minimized browser ---------- */
+@media (max-width: 1100px) {
+  .shell {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .sidebar {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    width: min(300px, 86vw) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow-y: auto !important;
+    transform: translateX(-110%) !important;
+    transition: transform .22s ease !important;
+    box-shadow: 14px 0 35px rgba(0,0,0,.55);
+  }
+
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px 12px 50px !important;
+    margin: 0 !important;
+  }
+
+  .content {
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+  }
+
+  .window {
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: 0 auto 22px !important;
+  }
+
+  .mobile-toggle {
+    display: flex !important;
+    position: fixed !important;
+    top: 14px !important;
+    left: 14px !important;
+    width: 42px !important;
+    height: 42px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1100 !important;
+  }
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 700px) {
+  .main {
+    padding: 70px 10px 40px !important;
+  }
+
+  .content,
+  .window {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .project-grid,
+  .tool-grid,
+  .cert-grid,
+  .award-grid,
+  .research-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ---------- prevent any card/text from creating a horizontal page ---------- */
+h1, h2, h3, h4, p, a, span, li {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   PERMANENT SIDEBAR FIX
+   Sidebar stays visible while the main portfolio scrolls.
+   ========================================================= */
+
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.shell {
+  display: block !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+}
+
+.sidebar {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 280px !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  z-index: 2000 !important;
+}
+
+.main {
+  margin-left: 280px !important;
+  width: calc(100% - 280px) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  padding: 24px 28px 70px !important;
+  overflow-x: hidden !important;
+}
+
+.content {
+  width: min(1120px, 100%) !important;
+  max-width: 1120px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-width: 0 !important;
+}
+
+.window {
+  width: 100% !important;
+  max-width: 1120px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Make the sidebar controls reachable at every viewport height. */
+.sidebar .profile-card,
+.sidebar nav,
+.sidebar .sidebar-bottom {
+  flex-shrink: 0 !important;
+}
+
+/* On shorter desktop screens, let the sidebar itself scroll rather than
+   cutting off Awards / Contact / Resume. */
+@media (min-width: 1101px) {
+  .sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    scrollbar-width: thin !important;
+  }
+
+  .sidebar > * {
+    flex-shrink: 0 !important;
+  }
+
+  .sidebar nav {
+    overflow: visible !important;
+  }
+}
+
+/* Mobile / narrow viewport: sidebar becomes an independent drawer. */
+@media (max-width: 1100px) {
+  .sidebar {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: min(310px, 88vw) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    transform: translateX(-110%) !important;
+    transition: transform .25s ease !important;
+    overflow-y: auto !important;
+    z-index: 3000 !important;
+  }
+
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 70px 12px 50px !important;
+  }
+
+  .content,
+  .window {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mobile-toggle {
+    display: flex !important;
+    position: fixed !important;
+    left: 14px !important;
+    top: 14px !important;
+    z-index: 4000 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Never let a section force the page wider than the viewport. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img, svg, video, iframe {
+  max-width: 100%;
+}
