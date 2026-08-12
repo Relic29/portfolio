@@ -1,6 +1,25 @@
-const toggle=document.getElementById("mobileToggle"),sidebar=document.getElementById("sidebar");
-toggle.addEventListener("click",()=>sidebar.classList.toggle("open"));
-document.querySelectorAll(".sidebar nav a").forEach(a=>a.addEventListener("click",()=>sidebar.classList.remove("open")));
-const links=[...document.querySelectorAll(".sidebar nav a")], sections=[...document.querySelectorAll("section[id]")];
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle("active",l.getAttribute("href")==="#"+e.target.id))}}),{threshold:.3});
-sections.forEach(s=>obs.observe(s));
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    const id=link.getAttribute('href');
+    if(id && id!=="#"){
+      const el=document.querySelector(id);
+      if(el){e.preventDefault();el.scrollIntoView({behavior:"smooth",block:"start"});}
+    }
+  });
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.opacity="1";
+      entry.target.style.transform="translateY(0)";
+    }
+  });
+},{threshold:.08});
+
+document.querySelectorAll(".skill-card,.project-card,.credential-card,.experience-card,.portrait-card").forEach(el=>{
+  el.style.opacity="0";
+  el.style.transform="translateY(18px)";
+  el.style.transition="opacity .6s ease, transform .6s ease";
+  observer.observe(el);
+});

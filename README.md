@@ -1,30 +1,25 @@
-# J Relic Of Rhofl — Screenshot-Style Cybersecurity Portfolio
+# RelicSec — Cybersecurity Portfolio
 
-This version follows the visual language of the screenshots you provided:
-- fixed left sidebar with profile card
-- dark green/black panels
-- subtle terminal/window chrome
-- rounded project cards
-- clean professional typography
-- restrained neon-green accents
-- smooth section navigation and responsive mobile menu
+A dark, professional cybersecurity portfolio for J Relic of Rhofl.
 
 ## Included
+- Responsive multi-section portfolio
+- Dark navy + gold + cyan visual theme
+- Profile image
 - Resume download
-- 8 uploaded certificate PDFs with View Certificate buttons
-- EVAPOCLIP repository link
-- DNS Record Finder repository link
-- Dynamic Kill Chain marked ongoing / no repository
-- Fund Trail Analysis marked confidential / restricted
-- Research and conference section
-- Awards section
-- Netlify Forms contact/message form
-- Responsive design
+- Project repository links
+- Certificate / credential PDF links
+- Contact message form
+- Skills, experience, projects, credentials and achievements
 
-## Run
-Open the folder in VS Code and launch `index.html` with Live Server.
+## Run locally
+Open `index.html` in a browser, or use the VS Code Live Server extension.
 
-## Netlify
-Deploy the complete folder. Netlify detects the form because the contact form uses `data-netlify="true"`. Check Netlify Dashboard → Forms for submissions.
+## GitHub Pages / Netlify
+Upload the entire folder. Keep the `assets` directory and its subfolders unchanged so PDF links work.
 
-Added Infoziant certificate: Full Stack Cyber Security Practitioner Program, conducted Dec 2025–Jan 2026 and awarded 07 January 2026.
+## Main project repositories
+- EVAPOCLIP: https://github.com/Relic29/EVAPOCLIP
+- DNS Record Finder: https://github.com/Relic29/DNS-RECORD-FINDER
+
+Fund Trail is marked restricted, and the ongoing Dynamic Kill Chain project has no public repository link.
